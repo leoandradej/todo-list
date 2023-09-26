@@ -1,1 +1,3 @@
-console.log("It's working!");
+import initializePage from "./landpage";
+
+initializePage();
