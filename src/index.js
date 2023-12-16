@@ -1,3 +1,3 @@
-import initializePage from "./landpage";
+import UI from "./modules/ui";
 
-initializePage();
+document.addEventListener('DOMContentLoaded', UI.loadHomepage);

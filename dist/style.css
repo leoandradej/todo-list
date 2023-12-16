@@ -1,72 +1,85 @@
 :root {
-    --primary-color: rgb(14, 240, 210);
-    --secondary-color: rgb(0, 50, 73);
-    --terciary-color: rgb(0, 126, 167);
-    --light-dark: rgba(0, 50, 73, .6);
-    --light-color: rgb(226, 230, 243);
+    --primary-clr: rgb(0, 126, 167);
+    --secondary-clr: rgba(0, 50, 73, .6);
+    --light-clr: #f4f4f4;
+    --dark-clr: #333;
+    --warning-clr: rgb(195, 29, 29);
+}
+
+*,
+*::before,
+*::after {
+    font-family: inherit;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Baloo 2', cursive;
-    background-color: var(--secondary-color);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    background-color: var(--primary-clr);
+    color: var(--light-clr);
+}
+
+h2 {
+    font-size: clamp(.9rem, 1.7vw, 1.7rem);
+    font-weight: 700;
+}
+
+li {
+    font-size: clamp(.7rem, 1.5vw, 1.7rem);
+    padding: .5rem;
+}
+
+li:hover {
+    background-color: var(--primary-clr);
+    padding: .5rem;
+    border-radius: .5rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+}
+
+.btn, .fa-plus {
+    cursor: pointer;
+    background: 0;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font-size: 1rem;
+    transition: opacity 150ms ease-in;
+}
+
+.btn:hover, .fa-plus:hover {
+    opacity: .7;
+}
+
+.add-task, .fa-plus {
+    color: var(--primary-clr);
 }
 
 #content {
     display: grid;
-    grid-template-columns: 1fr minmax(10rem, 80vw);
-    grid-template-rows: .1fr 3fr;
-    grid-template-areas: 
-        "header header"
-        "nav main";   
+    grid: 
+        "header header header header" auto
+        "...... nav   todo    ......" auto /
+        1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
 }
 
 /* Header */
 
 .header {
     grid-area: header;
-    width: max(40%, 100vw);
-    height: 5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--secondary-color)
-}
-
-.logo-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: .5rem;
-    margin-left: 2rem;
-}
-
-.logo {
     font-size: min(5vw, 3rem);
-    color: var(--light-color);
-}
-
-.logo-icon {
-    font-size: min(4vw, 2.3rem);
-}
-
-.logo-icon, span {
-    color: var(--primary-color);
-}
-
-.login {
-    margin-right: 2rem;
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
-    cursor: pointer;
-}
-
-.login-icon {
-    transition: .3s;
-}
-
-.login-icon:hover {
-    box-shadow: 0 0 1rem var(--light-color);
-    border-radius: 50%;
+    font-weight: 600;
+    margin-bottom: 3rem;
 }
 
 /* Nav */
@@ -74,209 +87,221 @@ body {
 .nav {
     grid-area: nav;
     width: min(27vw, 16rem);
-    height: 100vh;
-    margin-left: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 1.25rem rgb(0, 25, 36);
 }
 
-.tasks {
+.default-projects-list {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: .5rem;
-    margin-top: 1rem;
-    border-bottom: .1rem solid rgba(255, 255, 255, .4);
+    gap: .7rem;
+    margin-bottom: 2rem;
+    background-color: var(--secondary-clr);
+    border-radius: .5rem;
+    padding: 1rem;
 }
 
-.btn {
+.folder {
     display: flex;
     align-items: center;
-    margin-left: 1.5rem;
-    color: var(--light-color);
-    font-size: clamp(.9rem, 1.7vw, 1.7rem);
     gap: .5rem;
-    cursor: pointer;
-    padding: .5rem;
 }
 
-/* .btn {
-    font-family: inherit;
-    border: none;
-    padding: .5rem;
-    color: var(--light-color);
-    background-color: var(--secondary-color);
-    cursor: pointer;
-} */
+.task-count {
+    text-align: center;
+    line-height: 1.7rem;
+    font-size: .9rem;
+    width: 1.5rem;
+    height: 1.55rem;
+    background-color: var(--secondary-clr);
+    border-radius: 50%;
 
-.btn:hover {
-    background-color: var(--terciary-color);
-    padding: .5rem;
-    border-radius: .5rem;
-    transition: .3s;
-}
-
-.upcoming {
-    margin-bottom: 1rem;
 }
 
 .projects {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 1rem;
-    margin-top: 1rem;
+    background-color: var(--secondary-clr);
+    border-radius: .5rem;
+    padding: 1rem;
 }
 
-.projects-header {
-    color: var(--light-color);
-    font-size: clamp(1.2rem, 2.3vw, 1.8rem);
-    font-weight: 500;
-    margin-left: 1.5rem;
-}
-
-/* Main */
-
-.main {
-    grid-area: main;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.section-name {
-    text-align: center;
-    font-size: clamp(1.5rem, 3vw, 3rem);
-    font-weight: 600;
-    color: var(--light-color);
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-}
-
-.project-box {
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-}
-
-.project-name {
-    font-size: clamp(1rem, 2vw, 1.6rem);
-    font-weight: 500;
-    text-align: left;
-    color: var(--light-color);
-    margin-left: 1.5rem;
-}
-
-.add-task {
-    border: .5rem solid transparent;
-    box-shadow: .1rem .1rem 1.25rem rgb(0, 25, 36);
+.active {
+    background-color: var(--primary-clr);
     border-radius: .5rem;
 }
 
+.new {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    font-size: clamp(.7rem, 1.5vw, 1.7rem);
+    font-weight: 2 00;
+    outline: none;
+    transition: border-bottom 100ms ease-in;
+    order: 2;
+}
+
+.new:focus {
+    border-bottom-width: 3px;
+}
+
+.new::placeholder {
+    color: inherit;
+}
+
+.new:focus::placeholder {
+    opacity: .2 ;
+}
+
+/* Todo List */
+
+.todo-list {
+    --spacer: 1.5rem;
+
+    grid-area: todo;
+    background-color: var(--light-clr);
+    color: var(--dark-clr);
+    border-radius: .5rem;
+    position: relative;
+}
+
+.todo-header {
+    padding: var(--spacer);
+    background-color: #e4e4e4;
+    border-top-right-radius: .5rem;
+    border-top-left-radius: .5rem;
+}
+
+.project-name {
+    margin: 0;
+}
+
+.todo-content {
+    padding: var(--spacer);
+}
+
 .task-item {
-    width: 60vw;
-    height: 6vh;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border: .5rem solid transparent;
-    box-shadow: .1rem .1rem 1.25rem rgb(0, 25, 36);
-    border-radius: 1rem;
-    padding-left: .5rem;
-    cursor: pointer;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 1.25em;
+    font-size: clamp(.7rem, 1.5vw, 1.7rem);
 }
 
-.task-item:hover {
-    transform: scale(1.03);
+.task-item::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: currentColor;
+    opacity: .1;
 }
 
-.cb-container {
-    display: flex;
+.task-item label {
+    display: inline-flex;
     align-items: center;
+    position: relative;
+    margin-bottom: .5em;
 }
 
-.cb-container label {
-    cursor: pointer;
-    display: flex;
+.task-item label::after {
+    content: "";
+    position: absolute;
+    left: 1.5em;
+    right: 0;
+    height: 3px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 150ms ease-in-out;
 }
 
-.cb-container input[type="checkbox"] {
-    cursor: pointer;
+[type="checkbox"] {
     opacity: 0;
     position: absolute;
 }
 
-.cb-container label::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 400;
-    content: "\f111";
-    font-size: 1.5rem;
-    color: var(--light-color);
+.task-item:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+    transform: scale(1.2);
+    color: var(--primary-clr);
 }
 
-.cb-container label:hover::before,
-.cb-container input[type="checkbox"]:hover + label::before {
-    font-weight: 400;
-    content: "\f111";
-    font-size: 1.5rem;
-    color: var(--primary-color);
+[type="checkbox"]:checked + label .custom-checkbox {
+    background-color: var(--primary-clr);
+    border-color: var(--primary-clr);
+    box-shadow: inset 0 0 0 2px var(--light-clr);
 }
 
-.cb-container input[type="checkbox"]:checked + label::before {
-    content: "\f058";
+.task-input:checked + label {
+    opacity: .5;
+}
+
+.task-input:checked + label::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.custom-checkbox {
+    --size: .75em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    margin-right: var(--size);
+    cursor: pointer;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
+
+.icons {
+    margin-bottom: .5em;
+    cursor: pointer;
+}
+
+.edit-icon, .delete-icon {
+    transition: 300ms ease;
+}
+
+.edit-icon:hover, .delete-icon:hover {
+    color: var(--primary-clr);
+}
+
+.priority-icon {
+    color: red;
+}
+
+.clear {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 400;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-}
-
-.description {
-    width: 40rem;
-    font-size: clamp(.8rem, 1.5vw, 1.3rem);
-    font-weight: 400;
-    color: var(--light-color);
-}
-
-.date {
-    font-size: clamp(.8rem, 1.5vw, 1.3rem);
-    font-weight: 400;
-    color: var(--light-color);
-}
-
-.edit {
-    font-size: clamp(.8rem, 1.5vw, 1.3rem);
-    color: var(--light-color);
-}
-
-.edit:hover {
-    color: var(--primary-color);
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -5rem;
 }
 
 .delete {
-    font-size: clamp(.8rem, 1.5vw, 1.3rem);
-    color: var(--light-color);
+    background-color: var(--secondary-clr);
+    color: var(--light-clr);
+    padding: 1rem;
+    border-radius: .5rem;
 }
 
 .delete:hover {
-    color: var(--primary-color);
-}
-
-.priority {
-    font-size: clamp(.8rem, 1.5vw, 1.3rem);
-    color: red;
-    margin-right: .5rem;
+    background-color: var(--warning-clr);
 }
 
 .modal {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 10vh;
+    padding-top: 14vh;
     left: 0;
     top: 0;
     width: 100%;
@@ -293,22 +318,22 @@ body {
     margin: auto;
     border: none;
     border-radius: 1rem;
-    background-color: var(--terciary-color);
+    background-color: var(--light-clr);
 }
 
 .fa-xmark {
     position: absolute;
     top: 0;
     right: 0;
-    color: var(--light-color);
-    font-size: 2rem;
+    color: var(--dark-clr);
+    font-size: 1.5rem;
     margin-top: 1rem;
     margin-right: 1rem;
 }
   
 .fa-xmark:hover,
 .fa-xmark:focus {
-    color: var(--primary-color);
+    color: var(--primary-clr);
     cursor: pointer;
 }
 
@@ -321,10 +346,10 @@ body {
 }
 
 .form-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
     text-align: center;
-    color: var(--light-color)
+    color: var(--dark-clr)
 }
 
 .task-form {
@@ -341,11 +366,12 @@ body {
     flex-direction: column;
     align-items: flex-start;
     gap: .5rem;
+    position: relative;
 }
 
 .modal-input-field label {
-    font-size: 1.25rem;
-    color: var(--light-color);
+    font-size: 1.2rem;
+    color: var(--dark-clr);
 }
 
 .modal-input-field textarea {
@@ -364,10 +390,11 @@ body {
     border-radius: .5rem;
     border: none;
     cursor: pointer;
+    background-color: #e4e4e4;
 }
 
 .modal-form-input:focus, .modal-form-input:hover {
-    outline: .2rem solid var(--primary-color);
+    outline: .1rem solid var(--primary-clr);
 }
 
 .modal-form-input[type="date"] {
@@ -376,32 +403,39 @@ body {
     padding: .3rem;
 }
 
-.priority-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: .5rem;
-}
-
-.edit-priority {
-    font-size: 1.25rem;
-    color: var(--light-color);
-}
-
 .form-button {
     width: 5rem;
     height: 2rem;
-    background-color: var(--light-color);
+    background-color: #e4e4e4;
     border: none;
     border-radius: .5rem;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 500;
-    color: var(--terciary-color);
+    color: var(--dark-clr);
     transition: .3s;
     cursor: pointer;
 }
 
 .form-button:hover {
-    background-color: var(--primary-color);
+    background-color: var(--primary-clr);
     color: var(--light-color);
+}
+
+.priority-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.priority-box label {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: .5em;
+    gap: .5rem;
+}
+
+.priority {
+    opacity: 0;
+    position: absolute;
+    left: 5rem;
 }
