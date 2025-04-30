@@ -333,6 +333,7 @@ export default class UI {
                 alert("Task Name Can't be Empty!");
                 return;
             }
+            
             if (Storage.getTodoList().getProject(projectName).contains(newTask["task-title"])) {
                 alert('Task Already Exists!')
                 return;
